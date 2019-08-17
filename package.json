@@ -1,0 +1,14 @@
+{
+  "name": "stockbock",
+  "version": "1.0.0",
+  "description": "Simple Jim Cramer webscraping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gordon Yang",
+  "license": "ISC",
+  "dependencies": {
+    "slackbots": "^1.2.0"
+  }
+}
