@@ -1,5 +1,5 @@
 {
-  "name": "stockbock",
+  "name": "jimcramerbot",
   "version": "1.0.0",
   "description": "Simple Jim Cramer webscraping",
   "main": "index.js",
