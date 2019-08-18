@@ -1,28 +1,47 @@
-var SlackBot = require('slackbots');
+const SlackBot = require('slackbots');
+const axios = require('axios')
+const {token, name, pic} = require("./botconfig.json");
+const channel = "daily-discussion"
 
-// create a bot
-// const envKey = process.env.TOKEN
-var bot = new SlackBot({
-    token: "xoxb-706011687892-731651638150-N1qqgaexgEqrQ7RNuOpw0nip", // Add a bot https://my.slack.com/services/new/bot and put the token
-    name: "Mr. Jim Cramer the Mad Money Man"
+// Create new bot
+const bot = new SlackBot({
+    token: token,
+    name: name
 });
 
-bot.on('start', function() {
+// Bring bot online
+bot.on('start', () => {
     // more information about additional params https://api.slack.com/methods/chat.postMessage
-    var params = {
+    const params = {
         icon_emoji: ':ant:'
     };
-
+    console.log(bot.name+" is connected!")
     // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-    bot.postMessageToChannel('daily-discussion', "BOOOYAHHHHHH");
-
-    // define existing username instead of 'user_name'
-    bot.postMessageToUser('Anthony Ding', 'Anthony');
-
-    // If you add a 'slackbot' property,
-    // you will post to another user's slackbot channel instead of a direct message
-    bot.postMessageToUser('Anthony Ding', 'ant ', { 'slackbot': true, icon_emoji: ':ant:' });
+    //bot.postMessageToChannel(channel, "@Alan", pic);
 
     // define private group instead of 'private_group', where bot exist
     // bot.postMessageToGroup('private_group', 'meow!', params);
 });
+
+// Error handler
+bot.on("error", err => {
+  console.log(err);
+});
+
+// Message handler
+bot.on("message", data => {
+  if (data.type !== "message"){
+    return;
+  }
+  handleMessage(data.text);
+});
+
+// Message response
+function handleMessage(message){
+  const params = {
+    icon_emoji: ":duck:"
+  }
+  if(message.includes(" cramer")){
+    bot.postMessageToChannel(channel, "BOOOOYEAHHHHH", pic);
+  }
+}
